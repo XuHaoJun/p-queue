@@ -1,33 +1,55 @@
 {
 	"name": "@xuhaojun/p-queue",
-	"version": "7.2.0-noah.1",
+	"version": "7.2.0-noah.5",
 	"description": "Promise queue with concurrency control",
 	"license": "MIT",
 	"repository": "sindresorhus/p-queue",
 	"funding": "https://github.com/sponsors/sindresorhus",
 	"type": "module",
 	"exports": {
+		"./package.json": "./package.json",
 		".": {
-			"import": "./dist/index.mjs",
-			"require": "./dist/index.cjs",
+			"import": "./index.mjs",
+			"require": "./index.cjs",
 			"types": "./index.d.ts"
+		},
+		"./priority-queue": {
+			"import": "./priority-queue.mjs",
+			"require": "./priority-queue.cjs",
+			"types": "./priority-queue.d.ts"
+		},
+		"./queue": {
+			"import": "./queue.mjs",
+			"require": "./queue.cjs",
+			"types": "./queue.d.ts"
+		},
+		"./options": {
+			"import": "./options.mjs",
+			"require": "./options.cjs",
+			"types": "./options.d.ts"
+		},
+		"./lower-bound": {
+			"import": "./lower-bound.mjs",
+			"require": "./lower-bound.cjs",
+			"types": "./lower-bound.d.ts"
 		}
 	},
-	"main": "./dist/index.cjs",
+	"main": "./index.cjs",
 	"engines": {
 		"node": ">=12"
 	},
 	"scripts": {
 		"build": "del dist && tsc",
-		"build:multi": "del dist && tsc-multi",
+		"build:multi": "del dist && tsc-multi && npm run build:copy-files",
+		"build:copy-files": "cp ./dist/* .",
 		"test": "xo && npm run build && nyc ava",
 		"bench": "node --loader=ts-node/esm bench.ts",
 		"prepare": "npm run build:multi"
 	},
 	"files": [
-		"dist"
+		"*"
 	],
-	"types": "./dist/index.d.ts",
+	"types": "./index.d.ts",
 	"keywords": [
 		"promise",
 		"queue",
